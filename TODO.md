@@ -30,3 +30,5 @@
 - [x] **NEW: Mobile-Optimized Receipt** - Fully responsive receipt design
 - [x] **NEW: Transaction ID Generation** - Realistic transaction IDs for receipts
 - [x] **NEW: Download Receipt Feature** - Placeholder for PDF receipt download
+- [x] **NEW: QR Code Size Optimization** - Fixed QR code to stay within compact container
+- [x] **NEW: Mobile QR Responsiveness** - Responsive QR sizes for all device types
