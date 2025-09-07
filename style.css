@@ -1790,6 +1790,12 @@ input:checked + .toggle-slider:before {
     margin-bottom: 2rem;
 }
 
+.payment-form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .form-card, .qr-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -1885,12 +1891,11 @@ input:checked + .toggle-slider:before {
 .qr-display {
     background: rgba(255, 255, 255, 0.05);
     border: 2px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 12px;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 2rem;
     text-align: center;
     margin-bottom: 2rem;
-    min-height: 350px;
-    max-height: 500px;
+    min-height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1928,12 +1933,12 @@ input:checked + .toggle-slider:before {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
     border: 2px solid rgba(255, 255, 255, 0.4);
     margin: 0 auto;
 }
@@ -1948,7 +1953,7 @@ input:checked + .toggle-slider:before {
 .qr-details {
     text-align: left;
     width: 100%;
-    max-width: 350px;
+    max-width: 400px;
     margin: 0 auto;
 }
 
@@ -1986,6 +1991,25 @@ input:checked + .toggle-slider:before {
 
 .qr-details .detail-row.amount strong {
     color: #81c784;
+}
+
+.payment-methods-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.payment-methods-card h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .payment-methods h4 {
@@ -2101,12 +2125,16 @@ input:checked + .toggle-slider:before {
         font-size: 2rem;
     }
     
-    .payment-content {
+     .payment-content {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
-    .form-card, .qr-card {
+    .payment-form-section {
+        gap: 1.5rem;
+    }
+    
+    .form-card, .qr-card, .payment-methods-card {
         padding: 1.5rem;
     }
     
@@ -2114,15 +2142,15 @@ input:checked + .toggle-slider:before {
         flex-direction: column;
     }
     
-      .qr-display {
-        min-height: 300px;
-        padding: 1rem;
+       .qr-display {
+        min-height: 350px;
+        padding: 1.5rem;
     }
     
     .qr-code-visual {
-        width: 160px;
-        height: 160px;
-        padding: 12px;
+        width: 200px;
+        height: 200px;
+        padding: 15px;
     }
     
     .qr-details {
@@ -2185,16 +2213,16 @@ input:checked + .toggle-slider:before {
     background: linear-gradient(45deg, #388e3c, #66bb6a);
     color: white;
     border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 1.2rem 2.5rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(56, 142, 60, 0.3);
-    max-width: 300px;
+    box-shadow: 0 6px 20px rgba(56, 142, 60, 0.4);
+    max-width: 350px;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .simulate-payment-btn:hover {
@@ -2524,7 +2552,7 @@ input:checked + .toggle-slider:before {
         font-size: 1rem;
     }
     
-    .form-card, .qr-card, .receipt-card {
+     .form-card, .qr-card, .receipt-card, .payment-methods-card {
         padding: 1rem;
         border-radius: 12px;
     }
@@ -2575,16 +2603,16 @@ input:checked + .toggle-slider:before {
         font-size: 0.95rem;
     }
     
-     /* QR Code optimizations for small screens */
+      /* QR Code optimizations for small screens */
     .qr-display {
-        min-height: 280px;
-        padding: 0.75rem;
+        min-height: 320px;
+        padding: 1rem;
     }
     
     .qr-code-visual {
-        width: 140px;
-        height: 140px;
-        padding: 10px;
+        width: 180px;
+        height: 180px;
+        padding: 12px;
     }
     
     .qr-details {

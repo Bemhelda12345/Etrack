@@ -16,16 +16,10 @@ export function renderPaymentSection() {
                         <p class="form-subtitle">Enter your bill details to generate payment QR code</p>
                         
                         <form id="payment-form" class="payment-form">
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label for="bill-type">Bill Type</label>
                                 <select id="bill-type" required>
-                                    <option value="">Select bill type</option>
-                                    <option value="electric">⚡ Electric Bill</option>
-                                    <option value="water">💧 Water Bill</option>
-                                    <option value="internet">🌐 Internet Bill</option>
-                                    <option value="gas">🔥 Gas Bill</option>
-                                    <option value="phone">📱 Phone Bill</option>
-                                    <option value="cable">📺 Cable TV</option>
+                                    <option value="electric" selected>⚡ Electric Bill</option>
                                 </select>
                             </div>
                             
@@ -44,12 +38,38 @@ export function renderPaymentSection() {
                                 <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" required>
                             </div>
                             
-                            <button type="submit" class="generate-qr-btn">Generate Payment QR Code</button>
+                             <button type="submit" class="generate-qr-btn">Generate Payment QR Code</button>
                         </form>
+                    </div>
+                    
+                    <!-- Payment Methods Card moved here -->
+                    <div class="payment-methods-card">
+                        <h3>💳 Payment Method</h3>
+                        <p class="form-subtitle">Choose your preferred payment method</p>
+                        
+                        <div class="payment-options">
+                            <div class="payment-option" id="gcash-option">
+                                <div class="payment-card gcash-card">
+                                    <div class="payment-logo">
+                                        <span class="payment-name">GCash</span>
+                                    </div>
+                                    <p>Digital wallet payment</p>
+                                </div>
+                            </div>
+                            
+                            <div class="payment-option" id="paymaya-option">
+                                <div class="payment-card paymaya-card">
+                                    <div class="payment-logo">
+                                        <span class="payment-name">PayMaya</span>
+                                    </div>
+                                    <p>Digital wallet payment</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="qr-section">
+                 <div class="qr-section">
                     <div class="qr-card">
                         <h3>📱 Payment QR Code</h3>
                         <p class="qr-subtitle">Scan the QR code with your selected payment app</p>
@@ -59,29 +79,6 @@ export function renderPaymentSection() {
                                 <div class="qr-icon">📱</div>
                                 <p>QR Code will appear here</p>
                                 <span>Fill in bill details and select payment method to generate QR code</span>
-                            </div>
-                        </div>
-                        
-                        <div class="payment-methods">
-                            <h4>Payment Method</h4>
-                            <div class="payment-options">
-                                <div class="payment-option" id="gcash-option">
-                                    <div class="payment-card gcash-card">
-                                        <div class="payment-logo">
-                                            <span class="payment-name">GCash</span>
-                                        </div>
-                                        <p>Scan QR code using your GCash app and enter the amount to pay</p>
-                                    </div>
-                                </div>
-                                
-                                <div class="payment-option" id="paymaya-option">
-                                    <div class="payment-card paymaya-card">
-                                        <div class="payment-logo">
-                                            <span class="payment-name">PayMaya</span>
-                                        </div>
-                                        <p>Scan QR code using your PayMaya app and enter the amount to pay</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,11 +127,14 @@ export function initializePaymentSystem() {
         });
     });
 
-    // Set default selection
+     // Set default selection
     document.getElementById('gcash-option').classList.add('active');
+    
+    // Set default bill type to electric
+    document.getElementById('bill-type').value = 'electric';
 
     function generateQRCode() {
-        const billType = document.getElementById('bill-type').value;
+        const billType = document.getElementById('bill-type').value || 'electric';
         const accountNumber = document.getElementById('account-number').value;
         const customerName = document.getElementById('customer-name').value;
         const amount = document.getElementById('amount').value;
@@ -331,9 +331,9 @@ export function initializePaymentSystem() {
                 });
             }
             
-            if (downloadBtn) {
+             if (downloadBtn) {
                 downloadBtn.addEventListener('click', () => {
-                    alert('Receipt download feature will be implemented soon. This will generate a PDF receipt for your records.');
+                    downloadReceipt(currentBillData, paymentMethodName, transactionId, currentDate);
                 });
             }
         }, 100);
@@ -345,10 +345,62 @@ export function initializePaymentSystem() {
         location.reload(); // Simple reload to reset the entire payment form
     };
 
+     // Download receipt function
+    function downloadReceipt(billData, paymentMethod, transactionId, date) {
+        const billTypeDisplay = billData.billType.charAt(0).toUpperCase() + billData.billType.slice(1);
+        
+        // Create receipt content
+        const receiptContent = `
+ELECTRITRACK PAYMENT RECEIPT
+================================
+
+Payment Successful!
+Your ${billTypeDisplay} Bill payment has been processed.
+
+TRANSACTION DETAILS
+--------------------------------
+Bill Type: ${billTypeDisplay} Bill
+Account: ${billData.accountNumber}
+Customer: ${billData.customerName}
+Amount: ₱${billData.amount.toFixed(2)}
+Payment Method: ${paymentMethod}
+Transaction ID: ${transactionId}
+Status: COMPLETED
+Date: ${date}
+
+--------------------------------
+Thank you for using ElectriTrack!
+Keep this receipt for your records.
+
+Generated on: ${new Date().toLocaleString()}
+        `;
+
+        // Create downloadable file
+        const blob = new Blob([receiptContent], { type: 'text/plain' });
+        const url = window.URL.createObjectURL(blob);
+        
+        // Create download link
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `ElectriTrack_Receipt_${transactionId}.txt`;
+        document.body.appendChild(link);
+        
+        // Trigger download
+        link.click();
+        
+        // Clean up
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+        
+        // Show success message
+        setTimeout(() => {
+            alert('Receipt downloaded successfully! Check your downloads folder.');
+        }, 100);
+    }
+
     // Make downloadReceipt globally accessible
     window.downloadReceipt = function() {
-        // Simulate download (in real app, this would generate PDF)
-        alert('Receipt download feature will be implemented soon. This will generate a PDF receipt for your records.');
+        alert('Please complete a payment first to download a receipt.');
     };
 
     function generateTransactionId() {
