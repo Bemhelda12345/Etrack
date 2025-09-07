@@ -2,6 +2,7 @@ import { auth } from "./firebase-config.js";
 import { loginUser, registerUser, logoutUser } from "./auth.js";
 import { renderProfilePage } from "./profile.js";
 import { renderConsumptionDashboard, cleanupConsumptionListener } from "./consumption-fixed.js";
+import { renderPaymentSection, initializePaymentSystem } from "./payment.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
 // Application state
@@ -58,11 +59,13 @@ function updateNavigation(user) {
   const navProfile = document.getElementById("nav-profile");
   const navDashboard = document.getElementById("nav-dashboard");
   const navTrends = document.getElementById("nav-trends");
+  const navPay = document.getElementById("nav-pay");
 
   const sidebarAuth = document.getElementById("sidebar-auth");
   const sidebarProfile = document.getElementById("sidebar-profile");
   const sidebarDashboard = document.getElementById("sidebar-dashboard");
   const sidebarTrends = document.getElementById("sidebar-trends");
+  const sidebarPay = document.getElementById("sidebar-pay");
 
   if (user) {
     // User is authenticated
@@ -80,6 +83,8 @@ function updateNavigation(user) {
     if (sidebarDashboard) sidebarDashboard.style.display = "block";
     if (navTrends) navTrends.style.display = "inline";
     if (sidebarTrends) sidebarTrends.style.display = "block";
+    if (navPay) navPay.style.display = "inline";
+    if (sidebarPay) sidebarPay.style.display = "block";
 
     // Update brand to show user name
     const navBrand = document.querySelector(".nav-brand h1");
@@ -101,6 +106,8 @@ function updateNavigation(user) {
     if (sidebarDashboard) sidebarDashboard.style.display = "none";
     if (navTrends) navTrends.style.display = "none";
     if (sidebarTrends) sidebarTrends.style.display = "none";
+    if (navPay) navPay.style.display = "none";
+    if (sidebarPay) sidebarPay.style.display = "none";
 
     // Reset brand
     document.querySelector(".nav-brand h1").innerHTML = "⚡ ElectriTrack";
@@ -170,7 +177,7 @@ function setupNavigation() {
     });
   }
 
-  // Trends navigation
+   // Trends navigation
   const navTrends = document.getElementById("nav-trends");
   const sidebarTrends = document.getElementById("sidebar-trends");
   if (navTrends) {
@@ -189,6 +196,32 @@ function setupNavigation() {
       e.preventDefault();
       if (currentUser) {
         window.location.hash = "#trends";
+      } else {
+        window.location.hash = "#auth";
+      }
+      closeSidebar();
+    });
+  }
+
+  // Pay navigation
+  const navPay = document.getElementById("nav-pay");
+  const sidebarPay = document.getElementById("sidebar-pay");
+  if (navPay) {
+    navPay.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (currentUser) {
+        window.location.hash = "#pay";
+      } else {
+        window.location.hash = "#auth";
+      }
+      closeSidebar();
+    });
+  }
+  if (sidebarPay) {
+    sidebarPay.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (currentUser) {
+        window.location.hash = "#pay";
       } else {
         window.location.hash = "#auth";
       }
@@ -277,10 +310,20 @@ function handleRouteChange() {
         return; // Prevent further execution
       }
       break;
-    case "#trends":
+     case "#trends":
       if (currentUser) {
         console.log("Rendering trends for authenticated user");
         renderTrendsPageWrapper();
+      } else {
+        console.log("User not authenticated, redirecting to auth");
+        window.location.hash = "#auth";
+        return; // Prevent further execution
+      }
+      break;
+    case "#pay":
+      if (currentUser) {
+        console.log("Rendering pay page for authenticated user");
+        renderPayPage();
       } else {
         console.log("User not authenticated, redirecting to auth");
         window.location.hash = "#auth";
@@ -334,11 +377,17 @@ function updateActiveNavigation(hash) {
       if (navProf) navProf.classList.add("active");
       if (sidebarProf) sidebarProf.classList.add("active");
       break;
-    case "#trends":
+     case "#trends":
       const navTrend = document.getElementById("nav-trends");
       const sidebarTrend = document.getElementById("sidebar-trends");
       if (navTrend) navTrend.classList.add("active");
       if (sidebarTrend) sidebarTrend.classList.add("active");
+      break;
+    case "#pay":
+      const navPay = document.getElementById("nav-pay");
+      const sidebarPay = document.getElementById("sidebar-pay");
+      if (navPay) navPay.classList.add("active");
+      if (sidebarPay) sidebarPay.classList.add("active");
       break;
     case "#auth":
       const navAuth = document.getElementById("nav-auth");
@@ -371,6 +420,62 @@ function renderTrendsPageWrapper() {
     console.error("Error loading trends module:", error);
     window.location.hash = "#dashboard";
   });
+}
+
+// Render pay page
+function renderPayPage() {
+  currentPage = "pay";
+  const container = document.getElementById("app-container");
+  
+  // Render the payment section with bill payment form
+  container.innerHTML = renderPaymentSection();
+  
+  // Initialize the payment system functionality
+  initializePaymentSystem();
+}
+
+// Setup payment page functionality
+function setupPaymentPage() {
+  // Auto-pay toggle
+  const autoPayToggle = document.getElementById('auto-pay-toggle');
+  if (autoPayToggle) {
+    autoPayToggle.addEventListener('change', function() {
+      if (this.checked) {
+        alert('Auto-pay has been enabled. You will be notified before each automatic payment.');
+      } else {
+        alert('Auto-pay has been disabled.');
+      }
+    });
+  }
+}
+
+// Handle pay now button
+function handlePayNow() {
+  if (confirm('Proceed to pay $127.45 using your default payment method (Visa •••• 4242)?')) {
+    // Simulate payment processing
+    const payButton = document.querySelector('.btn-pay-now');
+    const originalText = payButton.textContent;
+    payButton.textContent = 'Processing...';
+    payButton.disabled = true;
+    
+    setTimeout(() => {
+      alert('Payment successful! Your bill has been paid.');
+      // Update UI to show paid status
+      const billStatus = document.querySelector('.bill-status');
+      if (billStatus) {
+        billStatus.textContent = 'Paid';
+        billStatus.className = 'bill-status paid';
+      }
+      payButton.textContent = 'Paid';
+      payButton.disabled = true;
+      payButton.style.backgroundColor = '#10b981';
+    }, 2000);
+  }
+}
+
+// Handle add payment method
+function handleAddPaymentMethod() {
+  alert('Add Payment Method feature will be implemented soon. You will be able to add credit cards, debit cards, and bank accounts.');
 }
 
 // Render authentication page
@@ -606,3 +711,7 @@ window.ElectriTrackApp = {
   currentPage: () => currentPage,
   auth: auth
 };
+
+// Make payment functions globally accessible
+window.handlePayNow = handlePayNow;
+window.handleAddPaymentMethod = handleAddPaymentMethod;
