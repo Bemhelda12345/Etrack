@@ -185,7 +185,7 @@ export function initializePaymentSystem() {
         qrDisplay.innerHTML = `
             <div class="qr-code-container">
                 <div class="qr-code-visual">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e896c825-4900-4009-8b6d-af61c09d9bae.png}+Payment" 
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e896c825-4900-4009-8b6d-af61c09d9bae.png" 
                          alt="QR Code for ${paymentMethodName} payment" 
                          class="qr-code-image">
                 </div>
@@ -212,8 +212,127 @@ export function initializePaymentSystem() {
                         <strong>${paymentMethodName}</strong>
                     </div>
                 </div>
+                <div class="qr-actions">
+                    <p class="qr-instruction">
+                        Scan this QR code using your ${paymentMethodName} app and enter the amount to pay
+                    </p>
+                    <button class="simulate-payment-btn" onclick="simulatePayment()">
+                        Simulate Payment Complete
+                    </button>
+                </div>
             </div>
         `;
+    }
+
+    // Make simulatePayment globally accessible
+    window.simulatePayment = function() {
+        if (!currentBillData) return;
+        
+        const paymentMethodName = currentBillData.paymentMethod === 'gcash' ? 'GCash' : 'PayMaya';
+        const billTypeDisplay = currentBillData.billType.charAt(0).toUpperCase() + currentBillData.billType.slice(1);
+        
+        // Generate transaction ID
+        const transactionId = generateTransactionId();
+        
+        // Get current date and time
+        const currentDate = new Date().toLocaleString('en-US', {
+            month: 'numeric',
+            day: 'numeric', 
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        });
+
+        // Show payment receipt
+        const container = document.querySelector('.payment-container');
+        container.innerHTML = `
+            <div class="receipt-container">
+                <div class="receipt-header">
+                    <div class="success-badge">
+                        <div class="success-icon">✅</div>
+                        <h2>Payment Successful!</h2>
+                    </div>
+                    <p class="success-message">
+                        Your ${billTypeDisplay} Bill payment of ₱${currentBillData.amount.toFixed(2)} has been processed successfully.
+                    </p>
+                </div>
+                
+                <div class="receipt-card">
+                    <h3>Transaction Details</h3>
+                    <div class="receipt-details">
+                        <div class="receipt-row">
+                            <span class="receipt-label">Bill Type:</span>
+                            <span class="receipt-value">${billTypeDisplay} Bill</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Account:</span>
+                            <span class="receipt-value">${currentBillData.accountNumber}</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Customer:</span>
+                            <span class="receipt-value">${currentBillData.customerName}</span>
+                        </div>
+                        <div class="receipt-row amount-row">
+                            <span class="receipt-label">Amount:</span>
+                            <span class="receipt-value">₱${currentBillData.amount.toFixed(2)}</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Payment Method:</span>
+                            <span class="receipt-value">${paymentMethodName}</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Transaction ID:</span>
+                            <span class="receipt-value transaction-id">${transactionId}</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Status:</span>
+                            <span class="receipt-value status-completed">COMPLETED</span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Date:</span>
+                            <span class="receipt-value">${currentDate}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="receipt-actions">
+                        <button class="make-another-payment-btn" onclick="makeAnotherPayment()">
+                            Make Another Payment
+                        </button>
+                        <button class="download-receipt-btn" onclick="downloadReceipt()">
+                            Download Receipt
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="receipt-footer">
+                    <p>Thank you for using ElectriTrack Payment System!</p>
+                    <p>Keep this receipt for your records.</p>
+                </div>
+            </div>
+        `;
+    };
+
+     // Make makeAnotherPayment globally accessible
+    window.makeAnotherPayment = function() {
+        // Reset form and go back to payment form
+        location.reload(); // Simple reload to reset the entire payment form
+    };
+
+    // Make downloadReceipt globally accessible
+    window.downloadReceipt = function() {
+        // Simulate download (in real app, this would generate PDF)
+        alert('Receipt download feature will be implemented soon. This will generate a PDF receipt for your records.');
+    };
+
+    function generateTransactionId() {
+        // Generate realistic transaction ID similar to the example
+        const prefix = 'TXN';
+        const timestamp = Date.now();
+        const random = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const suffix = Math.random().toString(36).substring(2, 3).toUpperCase();
+        return `${prefix}${timestamp}${random}${suffix}`;
     }
 
     function showPaymentSuccess() {

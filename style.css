@@ -2091,7 +2091,317 @@ input:checked + .toggle-slider:before {
         font-size: 1.8rem;
     }
     
-    .payment-header p {
+     .payment-header p {
         font-size: 1rem;
+    }
+}
+
+/* QR Actions and Simulate Payment Button */
+.qr-actions {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.qr-instruction {
+    color: #4a5568;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.simulate-payment-btn {
+    background: linear-gradient(135deg, #38a169, #48bb78);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+}
+
+.simulate-payment-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(56, 161, 105, 0.4);
+}
+
+.simulate-payment-btn:active {
+    transform: translateY(0);
+}
+
+/* Receipt Styles */
+.receipt-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: calc(100vh - 80px);
+}
+
+.receipt-header {
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.success-badge {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.success-badge .success-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-20px); }
+    80% { transform: translateY(-10px); }
+}
+
+.success-badge h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.success-message {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.receipt-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    margin-bottom: 2rem;
+}
+
+.receipt-card h3 {
+    color: #2d3748;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.receipt-details {
+    margin-bottom: 2rem;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f7fafc;
+}
+
+.receipt-row:last-child {
+    border-bottom: none;
+}
+
+.receipt-label {
+    color: #718096;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.receipt-value {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+.receipt-row.amount-row {
+    background: rgba(56, 161, 105, 0.1);
+    margin: 0.5rem -1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: none;
+}
+
+.receipt-row.amount-row .receipt-value {
+    font-size: 1.3rem;
+    color: #38a169;
+    font-weight: 700;
+}
+
+.transaction-id {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    background: #f7fafc;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.status-completed {
+    background: linear-gradient(135deg, #38a169, #48bb78);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.receipt-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.make-another-payment-btn, .download-receipt-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.make-another-payment-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.make-another-payment-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.download-receipt-btn {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.download-receipt-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.receipt-footer {
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.receipt-footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* Mobile Responsive for Receipt */
+@media (max-width: 768px) {
+    .receipt-container {
+        padding: 1rem;
+    }
+    
+    .success-badge {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .success-badge h2 {
+        font-size: 2rem;
+    }
+    
+    .success-badge .success-icon {
+        font-size: 3rem;
+    }
+    
+    .success-message {
+        font-size: 1.1rem;
+    }
+    
+    .receipt-card {
+        padding: 1.5rem;
+    }
+    
+    .receipt-actions {
+        flex-direction: column;
+    }
+    
+    .make-another-payment-btn, .download-receipt-btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .receipt-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+        text-align: left;
+    }
+    
+    .receipt-value {
+        text-align: left;
+        font-weight: 700;
+    }
+}
+
+@media (max-width: 480px) {
+    .success-badge h2 {
+        font-size: 1.8rem;
+    }
+    
+    .receipt-card {
+        padding: 1rem;
+    }
+    
+    .receipt-row.amount-row {
+        margin: 0.5rem -0.5rem;
+        padding: 0.75rem;
+    }
+    
+    .receipt-row.amount-row .receipt-value {
+        font-size: 1.1rem;
+    }
+    
+    .transaction-id {
+        font-size: 0.75rem;
+        word-break: break-all;
+    }
+}
+
+/* Additional QR Code responsive styles */
+@media (max-width: 768px) {
+    .qr-actions {
+        margin-top: 1rem;
+        padding-top: 0.75rem;
+    }
+    
+    .simulate-payment-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+    
+    .qr-instruction {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
     }
 }
