@@ -212,20 +212,27 @@ export function initializePaymentSystem() {
                         <strong>${paymentMethodName}</strong>
                     </div>
                 </div>
-                <div class="qr-actions">
+                 <div class="qr-actions">
                     <p class="qr-instruction">
                         Scan this QR code using your ${paymentMethodName} app and enter the amount to pay
                     </p>
-                    <button class="simulate-payment-btn" onclick="simulatePayment()">
+                    <button class="simulate-payment-btn" id="simulate-btn">
                         Simulate Payment Complete
                     </button>
                 </div>
             </div>
-        `;
+         `;
+        
+        // Add event listener to simulate button
+        setTimeout(() => {
+            const simulateBtn = document.getElementById('simulate-btn');
+            if (simulateBtn) {
+                simulateBtn.addEventListener('click', () => simulatePayment());
+            }
+        }, 100);
     }
 
-    // Make simulatePayment globally accessible
-    window.simulatePayment = function() {
+    function simulatePayment() {
         if (!currentBillData) return;
         
         const paymentMethodName = currentBillData.paymentMethod === 'gcash' ? 'GCash' : 'PayMaya';
@@ -296,11 +303,11 @@ export function initializePaymentSystem() {
                         </div>
                     </div>
                     
-                    <div class="receipt-actions">
-                        <button class="make-another-payment-btn" onclick="makeAnotherPayment()">
+                     <div class="receipt-actions">
+                        <button class="make-another-payment-btn" id="another-payment-btn">
                             Make Another Payment
                         </button>
-                        <button class="download-receipt-btn" onclick="downloadReceipt()">
+                        <button class="download-receipt-btn" id="download-receipt-btn">
                             Download Receipt
                         </button>
                     </div>
@@ -310,9 +317,27 @@ export function initializePaymentSystem() {
                     <p>Thank you for using ElectriTrack Payment System!</p>
                     <p>Keep this receipt for your records.</p>
                 </div>
-            </div>
+             </div>
         `;
-    };
+        
+        // Add event listeners to receipt buttons
+        setTimeout(() => {
+            const anotherPaymentBtn = document.getElementById('another-payment-btn');
+            const downloadBtn = document.getElementById('download-receipt-btn');
+            
+            if (anotherPaymentBtn) {
+                anotherPaymentBtn.addEventListener('click', () => {
+                    location.reload(); // Simple reload to reset the entire payment form
+                });
+            }
+            
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', () => {
+                    alert('Receipt download feature will be implemented soon. This will generate a PDF receipt for your records.');
+                });
+            }
+        }, 100);
+    }
 
      // Make makeAnotherPayment globally accessible
     window.makeAnotherPayment = function() {

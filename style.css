@@ -1751,12 +1751,12 @@ input:checked + .toggle-slider:before {
   }
 }
 
-/* Payment System Styles */
+/* Payment System Styles - Matching ElectriTrack Design */
 .payment-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     min-height: calc(100vh - 80px);
 }
 
@@ -1771,6 +1771,10 @@ input:checked + .toggle-slider:before {
     font-weight: 700;
     margin-bottom: 0.5rem;
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ffffff, #e3f2fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .payment-header p {
@@ -1787,15 +1791,16 @@ input:checked + .toggle-slider:before {
 }
 
 .form-card, .qr-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .form-card h3, .qr-card h3 {
-    color: #2d3748;
+    color: #ffffff;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -1805,7 +1810,7 @@ input:checked + .toggle-slider:before {
 }
 
 .form-subtitle, .qr-subtitle {
-    color: #718096;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
     margin-bottom: 1.5rem;
 }
@@ -1823,25 +1828,30 @@ input:checked + .toggle-slider:before {
 
 .payment-form .form-group label {
     font-weight: 500;
-    color: #2d3748;
+    color: #ffffff;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
 }
 
 .payment-form .form-group input, .payment-form .form-group select {
     padding: 0.75rem;
-    border: 2px solid #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: white;
-    color: #2d3748;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.payment-form .form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .payment-form .form-group input:focus, .payment-form .form-group select:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #42a5f5;
+    box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .payment-form .form-group select {
@@ -1849,7 +1859,7 @@ input:checked + .toggle-slider:before {
 }
 
 .generate-qr-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(45deg, #1976d2, #42a5f5);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -1859,11 +1869,13 @@ input:checked + .toggle-slider:before {
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .generate-qr-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 25px rgba(25, 118, 210, 0.3);
 }
 
 .generate-qr-btn:active {
@@ -1871,8 +1883,8 @@ input:checked + .toggle-slider:before {
 }
 
 .qr-display {
-    background: #f7fafc;
-    border: 2px dashed #cbd5e0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
@@ -1884,7 +1896,7 @@ input:checked + .toggle-slider:before {
 }
 
 .qr-placeholder {
-    color: #a0aec0;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .qr-placeholder .qr-icon {
@@ -1921,7 +1933,7 @@ input:checked + .toggle-slider:before {
 }
 
 .qr-details h4 {
-    color: #2d3748;
+    color: #ffffff;
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -1933,22 +1945,30 @@ input:checked + .toggle-slider:before {
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 0;
-    border-bottom: 1px solid #e2e8f0;
-    color: #2d3748;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .qr-details .detail-row:last-child {
     border-bottom: none;
 }
 
+.qr-details .detail-row strong {
+    color: #ffffff;
+}
+
 .qr-details .detail-row.amount {
     font-size: 1.1rem;
-    color: #38a169;
+    color: #81c784;
     font-weight: 600;
 }
 
+.qr-details .detail-row.amount strong {
+    color: #81c784;
+}
+
 .payment-methods h4 {
-    color: #2d3748;
+    color: #ffffff;
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -1988,15 +2008,17 @@ input:checked + .toggle-slider:before {
 }
 
 .gcash-card {
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    background: linear-gradient(135deg, #1976d2, #1565c0);
     color: white;
-    border-color: #007bff;
+    border-color: #1976d2;
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
 }
 
 .paymaya-card {
-    background: linear-gradient(135deg, #00d4aa, #00b894);
+    background: linear-gradient(135deg, #388e3c, #2e7d32);
     color: white;
-    border-color: #00d4aa;
+    border-color: #388e3c;
+    box-shadow: 0 4px 15px rgba(56, 142, 60, 0.3);
 }
 
 .payment-logo {
@@ -2112,33 +2134,35 @@ input:checked + .toggle-slider:before {
 }
 
 .simulate-payment-btn {
-    background: linear-gradient(135deg, #38a169, #48bb78);
+    background: linear-gradient(45deg, #388e3c, #66bb6a);
     color: white;
     border: none;
-    padding: 0.75rem 2rem;
+    padding: 1rem 2rem;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(56, 161, 105, 0.3);
+    box-shadow: 0 4px 15px rgba(56, 142, 60, 0.3);
+    width: 100%;
+    margin-top: 0.5rem;
 }
 
 .simulate-payment-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(56, 161, 105, 0.4);
+    box-shadow: 0 8px 25px rgba(56, 142, 60, 0.4);
 }
 
 .simulate-payment-btn:active {
     transform: translateY(0);
 }
 
-/* Receipt Styles */
+/* Receipt Styles - Matching ElectriTrack Theme */
 .receipt-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     min-height: calc(100vh - 80px);
 }
 
@@ -2155,6 +2179,7 @@ input:checked + .toggle-slider:before {
     padding: 2rem;
     margin-bottom: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .success-badge .success-icon {
@@ -2184,22 +2209,23 @@ input:checked + .toggle-slider:before {
 }
 
 .receipt-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
 }
 
 .receipt-card h3 {
-    color: #2d3748;
+    color: #ffffff;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
     text-align: center;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .receipt-details {
@@ -2211,7 +2237,7 @@ input:checked + .toggle-slider:before {
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 0;
-    border-bottom: 1px solid #f7fafc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .receipt-row:last-child {
@@ -2219,42 +2245,49 @@ input:checked + .toggle-slider:before {
 }
 
 .receipt-label {
-    color: #718096;
+    color: rgba(255, 255, 255, 0.7);
     font-weight: 500;
     font-size: 0.95rem;
 }
 
 .receipt-value {
-    color: #2d3748;
+    color: #ffffff;
     font-weight: 600;
     font-size: 0.95rem;
     text-align: right;
 }
 
 .receipt-row.amount-row {
-    background: rgba(56, 161, 105, 0.1);
+    background: rgba(129, 199, 132, 0.2);
     margin: 0.5rem -1rem;
     padding: 1rem;
     border-radius: 8px;
     border: none;
+    border: 1px solid rgba(129, 199, 132, 0.3);
+}
+
+.receipt-row.amount-row .receipt-label {
+    color: #81c784;
 }
 
 .receipt-row.amount-row .receipt-value {
     font-size: 1.3rem;
-    color: #38a169;
+    color: #81c784;
     font-weight: 700;
 }
 
 .transaction-id {
     font-family: 'Courier New', monospace;
     font-size: 0.85rem;
-    background: #f7fafc;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .status-completed {
-    background: linear-gradient(135deg, #38a169, #48bb78);
+    background: linear-gradient(45deg, #388e3c, #66bb6a);
     color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
@@ -2262,6 +2295,7 @@ input:checked + .toggle-slider:before {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(56, 142, 60, 0.3);
 }
 
 .receipt-actions {
@@ -2282,24 +2316,25 @@ input:checked + .toggle-slider:before {
 }
 
 .make-another-payment-btn {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(45deg, #1976d2, #42a5f5);
     color: white;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
 }
 
 .make-another-payment-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4);
 }
 
 .download-receipt-btn {
-    background: white;
-    color: #667eea;
-    border: 2px solid #667eea;
+    background: transparent;
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .download-receipt-btn:hover {
-    background: #667eea;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
     color: white;
     transform: translateY(-2px);
 }
@@ -2315,8 +2350,52 @@ input:checked + .toggle-slider:before {
     margin-bottom: 0.5rem;
 }
 
-/* Mobile Responsive for Receipt */
+/* Enhanced Mobile Optimization */
 @media (max-width: 768px) {
+    .payment-container, .receipt-container {
+        padding: 1rem;
+    }
+    
+    .payment-header h2 {
+        font-size: 2rem;
+    }
+    
+    .payment-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .form-card, .qr-card {
+        padding: 1.5rem;
+    }
+    
+    .payment-options {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .payment-option {
+        width: 100%;
+    }
+    
+    .payment-card {
+        height: auto;
+        padding: 1.25rem;
+        min-height: 80px;
+    }
+    
+    .qr-display {
+        min-height: 250px;
+        padding: 1.5rem;
+    }
+    
+    .generate-qr-btn, .simulate-payment-btn {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    /* Receipt Mobile Styles */
     .receipt-container {
         padding: 1rem;
     }
@@ -2344,11 +2423,13 @@ input:checked + .toggle-slider:before {
     
     .receipt-actions {
         flex-direction: column;
+        gap: 1rem;
     }
     
     .make-another-payment-btn, .download-receipt-btn {
         width: 100%;
-        margin-bottom: 1rem;
+        padding: 1rem 2rem;
+        font-size: 1rem;
     }
     
     .receipt-row {
@@ -2356,21 +2437,63 @@ input:checked + .toggle-slider:before {
         align-items: flex-start;
         gap: 0.25rem;
         text-align: left;
+        padding: 1rem 0;
     }
     
     .receipt-value {
         text-align: left;
         font-weight: 700;
     }
+    
+    .receipt-row.amount-row {
+        flex-direction: column;
+        padding: 1rem;
+        margin: 0.5rem -0.5rem;
+    }
+    
+    .qr-actions {
+        margin-top: 1rem;
+        padding-top: 0.75rem;
+    }
+    
+    .qr-instruction {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
 }
 
 @media (max-width: 480px) {
+    .payment-container, .receipt-container {
+        padding: 0.75rem;
+    }
+    
+    .payment-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .payment-header p {
+        font-size: 1rem;
+    }
+    
+    .form-card, .qr-card, .receipt-card {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .success-badge {
+        padding: 1rem;
+    }
+    
     .success-badge h2 {
         font-size: 1.8rem;
     }
     
-    .receipt-card {
-        padding: 1rem;
+    .success-badge .success-icon {
+        font-size: 2.5rem;
+    }
+    
+    .success-message {
+        font-size: 1rem;
     }
     
     .receipt-row.amount-row {
@@ -2386,22 +2509,61 @@ input:checked + .toggle-slider:before {
         font-size: 0.75rem;
         word-break: break-all;
     }
-}
-
-/* Additional QR Code responsive styles */
-@media (max-width: 768px) {
-    .qr-actions {
-        margin-top: 1rem;
-        padding-top: 0.75rem;
-    }
     
-    .simulate-payment-btn {
-        padding: 0.75rem 1.5rem;
+    .make-another-payment-btn, .download-receipt-btn {
+        padding: 0.875rem 1.5rem;
         font-size: 0.95rem;
     }
     
-    .qr-instruction {
-        font-size: 0.85rem;
-        margin-bottom: 0.75rem;
+    /* Improved touch targets */
+    .payment-option {
+        min-height: 60px;
+    }
+    
+    .generate-qr-btn, .simulate-payment-btn {
+        min-height: 50px;
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .payment-card {
+        min-height: 70px;
+        padding: 1rem;
+    }
+    
+    .payment-name {
+        font-size: 1.1rem;
+    }
+    
+    .payment-card p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (hover: none) {
+    .payment-option:active .payment-card {
+        transform: scale(0.98);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .generate-qr-btn:active, 
+    .simulate-payment-btn:active,
+    .make-another-payment-btn:active,
+    .download-receipt-btn:active {
+        transform: scale(0.98);
+    }
+    
+    /* Remove hover effects on touch devices */
+    .payment-option:hover {
+        transform: none;
+    }
+    
+    .generate-qr-btn:hover,
+    .simulate-payment-btn:hover,
+    .make-another-payment-btn:hover,
+    .download-receipt-btn:hover {
+        transform: none;
+        box-shadow: none;
     }
 }
