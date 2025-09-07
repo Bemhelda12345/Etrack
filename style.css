@@ -1886,13 +1886,15 @@ input:checked + .toggle-slider:before {
     background: rgba(255, 255, 255, 0.05);
     border: 2px dashed rgba(255, 255, 255, 0.3);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 1.5rem;
     text-align: center;
     margin-bottom: 2rem;
-    min-height: 300px;
+    min-height: 250px;
+    max-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .qr-placeholder {
@@ -1919,24 +1921,43 @@ input:checked + .toggle-slider:before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
+    max-width: 100%;
+}
+
+.qr-code-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    margin: 0 auto;
 }
 
 .qr-code-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .qr-details {
     text-align: left;
     width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
 }
 
 .qr-details h4 {
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-align: center;
 }
 
@@ -1944,9 +1965,10 @@ input:checked + .toggle-slider:before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 0.4rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
 }
 
 .qr-details .detail-row:last-child {
@@ -2093,9 +2115,35 @@ input:checked + .toggle-slider:before {
         flex-direction: column;
     }
     
-    .qr-display {
-        min-height: 250px;
-        padding: 1.5rem;
+     .qr-display {
+        min-height: 220px;
+        padding: 1rem;
+    }
+    
+    .qr-code-visual {
+        width: 120px;
+        height: 120px;
+        padding: 8px;
+    }
+    
+    .qr-details {
+        max-width: 280px;
+    }
+    
+    .qr-details .detail-row {
+        padding: 0.35rem 0;
+        font-size: 0.85rem;
+    }
+    
+    .qr-instruction {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .simulate-payment-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+        max-width: 200px;
     }
 }
 
@@ -2120,30 +2168,32 @@ input:checked + .toggle-slider:before {
 
 /* QR Actions and Simulate Payment Button */
 .qr-actions {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     text-align: center;
-    padding-top: 1rem;
-    border-top: 1px solid #e2e8f0;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .qr-instruction {
-    color: #4a5568;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
     font-style: italic;
+    line-height: 1.3;
 }
 
 .simulate-payment-btn {
     background: linear-gradient(45deg, #388e3c, #66bb6a);
     color: white;
     border: none;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(56, 142, 60, 0.3);
+    max-width: 250px;
     width: 100%;
     margin-top: 0.5rem;
 }
@@ -2520,10 +2570,48 @@ input:checked + .toggle-slider:before {
         min-height: 60px;
     }
     
-    .generate-qr-btn, .simulate-payment-btn {
+     .generate-qr-btn, .simulate-payment-btn {
         min-height: 50px;
         padding: 0.875rem 1rem;
         font-size: 0.95rem;
+    }
+    
+    /* QR Code optimizations for small screens */
+    .qr-display {
+        min-height: 200px;
+        padding: 0.75rem;
+    }
+    
+    .qr-code-visual {
+        width: 100px;
+        height: 100px;
+        padding: 6px;
+    }
+    
+    .qr-details {
+        max-width: 250px;
+    }
+    
+    .qr-details h4 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .qr-details .detail-row {
+        padding: 0.3rem 0;
+        font-size: 0.8rem;
+    }
+    
+    .qr-instruction {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+    }
+    
+    .simulate-payment-btn {
+        max-width: 180px;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
     }
     
     .payment-card {
