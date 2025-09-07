@@ -1791,9 +1791,7 @@ input:checked + .toggle-slider:before {
 }
 
 .payment-form-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    display: block;
 }
 
 .form-card, .qr-card {
@@ -1993,24 +1991,7 @@ input:checked + .toggle-slider:before {
     color: #81c784;
 }
 
-.payment-methods-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.payment-methods-card h3 {
-    color: #ffffff;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+/* Payment methods now inside form - no separate card needed */
 
 .payment-methods h4 {
     color: #ffffff;
@@ -2130,11 +2111,7 @@ input:checked + .toggle-slider:before {
         gap: 1.5rem;
     }
     
-    .payment-form-section {
-        gap: 1.5rem;
-    }
-    
-    .form-card, .qr-card, .payment-methods-card {
+     .form-card, .qr-card {
         padding: 1.5rem;
     }
     
@@ -2552,7 +2529,7 @@ input:checked + .toggle-slider:before {
         font-size: 1rem;
     }
     
-     .form-card, .qr-card, .receipt-card, .payment-methods-card {
+      .form-card, .qr-card, .receipt-card {
         padding: 1rem;
         border-radius: 12px;
     }

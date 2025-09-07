@@ -33,39 +33,37 @@ export function renderPaymentSection() {
                                 <input type="text" id="customer-name" placeholder="Enter customer name" required>
                             </div>
                             
-                            <div class="form-group">
+                             <div class="form-group">
                                 <label for="amount">Amount (PHP)</label>
                                 <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" required>
                             </div>
                             
-                             <button type="submit" class="generate-qr-btn">Generate Payment QR Code</button>
-                        </form>
-                    </div>
-                    
-                    <!-- Payment Methods Card moved here -->
-                    <div class="payment-methods-card">
-                        <h3>💳 Payment Method</h3>
-                        <p class="form-subtitle">Choose your preferred payment method</p>
-                        
-                        <div class="payment-options">
-                            <div class="payment-option" id="gcash-option">
-                                <div class="payment-card gcash-card">
-                                    <div class="payment-logo">
-                                        <span class="payment-name">GCash</span>
+                            <!-- Payment Method Selection inside form -->
+                            <div class="form-group">
+                                <label>Payment Method</label>
+                                <div class="payment-options">
+                                    <div class="payment-option" id="gcash-option">
+                                        <div class="payment-card gcash-card">
+                                            <div class="payment-logo">
+                                                <span class="payment-name">GCash</span>
+                                            </div>
+                                            <p>Digital wallet payment</p>
+                                        </div>
                                     </div>
-                                    <p>Digital wallet payment</p>
+                                    
+                                    <div class="payment-option" id="paymaya-option">
+                                        <div class="payment-card paymaya-card">
+                                            <div class="payment-logo">
+                                                <span class="payment-name">PayMaya</span>
+                                            </div>
+                                            <p>Digital wallet payment</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
-                            <div class="payment-option" id="paymaya-option">
-                                <div class="payment-card paymaya-card">
-                                    <div class="payment-logo">
-                                        <span class="payment-name">PayMaya</span>
-                                    </div>
-                                    <p>Digital wallet payment</p>
-                                </div>
-                            </div>
-                        </div>
+                            <button type="submit" class="generate-qr-btn">Generate Payment QR Code</button>
+                        </form>
                     </div>
                 </div>
                 
